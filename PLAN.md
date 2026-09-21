@@ -196,9 +196,37 @@ GET  /auth/me       → { user }
 - [x] Exportación CSV (Excel en v2)
 - [x] APIs demo: `/users`, `/team/members`, `/reports/summary`
 
-### Fase 11 — Pruebas y despliegue
+### Fase 11 — Pruebas y despliegue *(completada)*
 
-- Lint, build, `.htaccess`, F5 en rutas internas, responsive, permisos
+- [x] Revisar rutas públicas y privadas en `App.tsx`
+- [x] Confirmar protección por sesión y roles (`ProtectedRoute`, `RoleRoute`)
+- [x] Confirmar `.htaccess` SPA (fallback a `index.html`)
+- [x] `npm run lint` + `npm run build` en verde
+- [x] Script `verify:dist` comprueba `dist/.htaccess`, `index.html` y assets
+- [x] Checklist de despliegue en README
+- [x] Sin secretos en el repositorio (`.env` ignorado; solo `.env.example` / `.env.development`)
+
+**Comando de cierre:**
+
+```bash
+npm run release:check
+```
+
+### Criterios de aceptación (estado)
+
+| Criterio | Estado |
+| --- | --- |
+| Sitio comercial funciona | Conservado (`/`, `/servicios`, `/nosotros`, `/contacto`, `/ceere-sio`) |
+| Build sin errores | Verificado en Fase 11 |
+| Rutas `/app/*` requieren auth | `ProtectedRoute` |
+| Menú/roles visuales | ADMIN / LEADER / MEMBER |
+| Cookies HTTP-only (modo `api`) | Cliente listo; demo temporal con `VITE_AUTH_MODE=demo` |
+| API real / mocks marcados | Mocks DEMO identificados hasta BackCeere |
+| Loading / error / vacío | Presente en módulos principales |
+| Responsive | Layouts públicos y `AppLayout` |
+| F5 sin 404 | `.htaccess` en `dist/` |
+| Sin secretos en repo | `.env` en `.gitignore` |
+| README con instalación/despliegue | Actualizado |
 
 ---
 
@@ -254,3 +282,4 @@ Durante la transición, `/admin/*` redirige a `/app/dashboard`.
 | 2026-09-21 | 8 | Reporte diario: formulario, historial, vista equipo |
 | 2026-09-21 | 9 | Agenda: mes/semana/día, CRUD eventos, filtros |
 | 2026-09-21 | 10 | Usuarios, equipo, reportes por fechas |
+| 2026-09-21 | 11 | Pruebas, verify:dist, checklist despliegue |
