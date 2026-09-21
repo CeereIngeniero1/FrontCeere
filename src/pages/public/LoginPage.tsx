@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { ApiHealthBadge } from '../../components/feedback/ApiHealthBadge'
 import { Logo } from '../../components/Logo'
 import { Alert } from '../../components/ui/Alert'
 import { Button } from '../../components/ui/Button'
@@ -80,6 +81,8 @@ export function LoginPage() {
         <p style={{ marginTop: '1rem', marginBottom: 0 }}>
           <Link to="/">Volver al sitio público</Link>
         </p>
+
+        <ApiHealthBadge />
       </Card>
     </div>
   )
