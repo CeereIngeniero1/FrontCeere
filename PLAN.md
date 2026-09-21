@@ -143,10 +143,13 @@ GET  /auth/me       → { user }
 - [x] `AppLayout` con menú por permisos, topbar y usuario
 - [ ] Pulido responsive / UX adicional si hace falta
 
-### Fase 5 — Dashboard
+### Fase 5 — Dashboard *(completada)*
 
-- Personal (`/app/dashboard`)
-- Equipo (`/app/equipo` o sección en dashboard) con datos de API
+- [x] Dashboard personal (`/app/dashboard`) con indicadores requeridos
+- [x] Dashboard de equipo (`/app/equipo`) para ADMIN / LEADER
+- [x] Estados de carga, error y vacío
+- [x] Cliente `dashboard.api.ts` + agregador DEMO marcado (`isDemoData`)
+- [x] Sin vigilancia invasiva (solo avances y resultados)
 
 ### Fase 6 — Tareas
 
@@ -220,3 +223,4 @@ Durante la transición, `/admin/*` redirige a `/app/dashboard`.
 | 2026-09-21 | 1 | Auditoría, PLAN.md, estructura de carpetas, README/.env.example |
 | 2026-09-21 | 2 | Axios, TanStack Query, http-client, health check, ApiHealthBadge |
 | 2026-09-21 | 3 | AuthContext, /app/*, roles, refresh interceptor, modo demo temporal |
+| 2026-09-21 | 5 | Dashboards personal y equipo + dashboard.api |

@@ -5,6 +5,7 @@ export {
   meRequest,
   refreshRequest,
 } from './auth.api'
+export { getPersonalDashboard, getTeamDashboard } from './dashboard.api'
 export {
   httpClient,
   getApiBaseUrl,

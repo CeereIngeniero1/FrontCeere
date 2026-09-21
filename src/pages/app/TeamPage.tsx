@@ -1,11 +1,6 @@
-import { PlaceholderPage } from './PlaceholderPage'
+import { TeamDashboardView } from '../../features/dashboard/TeamDashboardView'
 
+/** Dashboard del equipo (`/app/equipo`) — ADMIN / LEADER. */
 export function TeamPage() {
-  return (
-    <PlaceholderPage
-      title="Equipo"
-      description="Vista de integrantes, roles, tareas y reportes (ADMIN y LEADER)."
-      phaseHint="la Fase 10"
-    />
-  )
+  return <TeamDashboardView />
 }

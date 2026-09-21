@@ -26,4 +26,8 @@ export const queryClient = new QueryClient({
 
 export const queryKeys = {
   health: ['health'] as const,
+  dashboard: {
+    personal: ['dashboard', 'personal'] as const,
+    team: ['dashboard', 'team'] as const,
+  },
 }

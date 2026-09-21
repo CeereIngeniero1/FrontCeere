@@ -125,5 +125,4 @@ Suba el contenido de `dist/` (`index.html`, `.htaccess`, `assets/`).
 
 ## Siguiente paso
 
-**Fase 5** — dashboards con indicadores reales (cuando el API esté disponible).  
-La Fase 4 (layout) ya quedó mayormente cubierta por `AppLayout`.
+**Fase 6** — tareas (listado, filtros, formularios) contra la API real cuando esté disponible.

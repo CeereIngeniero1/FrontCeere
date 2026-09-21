@@ -1,4 +1,4 @@
-export { DashboardPage } from '../admin/DashboardPage'
+export { DashboardPage } from './DashboardPage'
 export { TasksPage } from '../admin/TasksPage'
 export { AgendaPage } from '../admin/AgendaPage'
 export { TimePage } from '../admin/TimePage'
