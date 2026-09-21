@@ -1,0 +1,58 @@
+import type { Appointment } from '../types'
+
+export const initialAppointments: Appointment[] = [
+  {
+    id: 'appt-1',
+    title: 'Soporte impresión de historias',
+    date: '2026-09-21',
+    time: '09:00',
+    type: 'soporte',
+    assignee: 'Ana Gómez',
+    description: 'Revisión remota con Clínica Demo Norte.',
+  },
+  {
+    id: 'appt-2',
+    title: 'Reunión de seguimiento semanal',
+    date: '2026-09-21',
+    time: '11:30',
+    type: 'reunion',
+    assignee: 'Laura Méndez',
+    description: 'Revisión de tareas y bloqueos del equipo.',
+  },
+  {
+    id: 'appt-3',
+    title: 'Demostración Ceere SIO',
+    date: '2026-09-23',
+    time: '15:00',
+    type: 'demostracion',
+    assignee: 'Laura Méndez',
+    description: 'Presentación de módulos principales a prospecto.',
+  },
+  {
+    id: 'appt-4',
+    title: 'Entrega de ajustes de agenda',
+    date: '2026-09-24',
+    time: '10:00',
+    type: 'entrega',
+    assignee: 'Carlos Ruiz',
+    description: 'Entrega de cambios solicitados en agenda de citas.',
+  },
+  {
+    id: 'appt-5',
+    title: 'Soporte facturación electrónica',
+    date: '2026-09-25',
+    time: '14:00',
+    type: 'soporte',
+    assignee: 'Carlos Ruiz',
+    description: 'Acompañamiento a Consultorio Médico Vida.',
+  },
+  {
+    id: 'appt-6',
+    title: 'Reunión con proveedor de hosting',
+    date: '2026-09-26',
+    time: '09:30',
+    type: 'reunion',
+    assignee: 'Ana Gómez',
+    description: 'Revisión de subdominio de pruebas.',
+  },
+]

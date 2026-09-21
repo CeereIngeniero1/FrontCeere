@@ -1,0 +1,73 @@
+import type { TimeEntry } from '../types'
+
+export const initialTimeEntries: TimeEntry[] = [
+  {
+    id: 'time-1',
+    activity: 'Análisis de ticket de impresión',
+    project: 'Clínica Demo Norte',
+    date: '2026-09-21',
+    startTime: '08:00',
+    endTime: '10:00',
+    totalMinutes: 120,
+    notes: 'Revisión de configuración de impresora y plantilla.',
+  },
+  {
+    id: 'time-2',
+    activity: 'Preparación de demostración',
+    project: 'Prospecto Clínica Andina',
+    date: '2026-09-21',
+    startTime: '10:15',
+    endTime: '11:15',
+    totalMinutes: 60,
+    notes: 'Armado de guion y ambiente demo.',
+  },
+  {
+    id: 'time-3',
+    activity: 'Desarrollo de reporte',
+    project: 'IPS Horizonte',
+    date: '2026-09-20',
+    startTime: '09:00',
+    endTime: '12:30',
+    totalMinutes: 210,
+    notes: 'Ajustes en consulta de informes.',
+  },
+  {
+    id: 'time-4',
+    activity: 'Soporte remoto',
+    project: 'Consultorio Odontológico Sol',
+    date: '2026-09-19',
+    startTime: '14:00',
+    endTime: '15:30',
+    totalMinutes: 90,
+    notes: 'Capacitación breve de agenda.',
+  },
+  {
+    id: 'time-5',
+    activity: 'Documentación interna',
+    project: 'Proyecto interno',
+    date: '2026-09-18',
+    startTime: '08:30',
+    endTime: '11:00',
+    totalMinutes: 150,
+    notes: 'Actualización de procedimientos de soporte.',
+  },
+  {
+    id: 'time-6',
+    activity: 'Pruebas de facturación',
+    project: 'Consultorio Médico Vida',
+    date: '2026-09-17',
+    startTime: '09:00',
+    endTime: '11:00',
+    totalMinutes: 120,
+    notes: 'Validación de escenarios de emisión.',
+  },
+]
+
+export const projects = [
+  'Clínica Demo Norte',
+  'Consultorio Odontológico Sol',
+  'IPS Horizonte',
+  'Prospecto Clínica Andina',
+  'Consultorio Médico Vida',
+  'Proyecto interno',
+] as const

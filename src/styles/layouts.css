@@ -1,0 +1,251 @@
+.public-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.public-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--header-height);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.public-header-inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.public-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.public-nav a {
+  color: var(--color-gray-700);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.public-nav a:hover,
+.public-nav a.active {
+  color: var(--color-blue);
+}
+
+.public-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.nav-toggle {
+  display: none;
+}
+
+.public-main {
+  flex: 1;
+}
+
+.public-footer {
+  background: var(--color-navy-deep);
+  color: rgba(255, 255, 255, 0.85);
+  padding: 3rem 0 1.5rem;
+  margin-top: auto;
+}
+
+.public-footer a {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.public-footer a:hover {
+  color: var(--color-cyan);
+}
+
+.footer-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  margin-bottom: 2rem;
+}
+
+.footer-grid h3 {
+  color: var(--color-white);
+  font-size: 1rem;
+  margin-bottom: 0.85rem;
+}
+
+.footer-grid ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 1rem;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.admin-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  background: var(--color-gray-50);
+}
+
+.admin-sidebar {
+  background: linear-gradient(180deg, var(--color-navy-deep), var(--color-navy));
+  color: var(--color-white);
+  padding: 1.25rem 1rem;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.admin-nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem 0.85rem;
+  border-radius: var(--radius-sm);
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 500;
+}
+
+.admin-nav a:hover,
+.admin-nav a.active {
+  background: rgba(0, 180, 216, 0.18);
+  color: var(--color-white);
+}
+
+.admin-main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-topbar {
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-gray-200);
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.admin-topbar-user {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.admin-content {
+  padding: 1.25rem;
+}
+
+.demo-banner {
+  background: #fff7e8;
+  border: 1px solid #f0d5a0;
+  color: #7a4d05;
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1rem;
+  font-size: 0.92rem;
+}
+
+.mobile-menu-btn {
+  display: none;
+}
+
+.sidebar-backdrop {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .public-nav,
+  .public-header-actions .btn {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  .public-header.is-open .public-nav,
+  .public-header.is-open .public-header-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: var(--header-height);
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-gray-200);
+    padding: 1rem;
+    gap: 0.75rem;
+    box-shadow: var(--shadow-md);
+  }
+
+  .public-header.is-open .public-header-actions {
+    top: calc(var(--header-height) + 220px);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: min(280px, 85vw);
+    transform: translateX(-105%);
+    transition: transform 0.2s ease;
+    z-index: 200;
+  }
+
+  .admin-shell.sidebar-open .admin-sidebar {
+    transform: translateX(0);
+  }
+
+  .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(7, 21, 38, 0.45);
+    z-index: 150;
+  }
+
+  .mobile-menu-btn {
+    display: inline-flex;
+  }
+}
