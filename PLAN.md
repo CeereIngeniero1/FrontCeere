@@ -119,17 +119,29 @@ src/
 
 **Nota:** al cerrar esta fase, `api-prueba.ceere.net` aún no resolvía DNS desde el entorno de desarrollo. El cliente queda listo; cuando el API esté publicado, el badge de login mostrará el estado real.
 
-### Fase 3 — Autenticación real
+### Fase 3 — Autenticación *(completada)*
 
-- Login / me / logout / refresh con cookies HTTP-only
-- Rutas protegidas sin LocalStorage de tokens
-- Roles visuales `ADMIN` | `LEADER` | `MEMBER`
-- Migrar rutas privadas de `/admin/*` → `/app/*` (con redirecciones de compatibilidad si hace falta)
+- [x] `src/api/auth.api.ts` — login / me / logout / refresh
+- [x] `AuthProvider` + cookies HTTP-only (`withCredentials`) en modo `api`
+- [x] Interceptor de refresh con un solo reintento (sin bucles infinitos)
+- [x] Rutas privadas `/app/*` protegidas + `RoleRoute`
+- [x] Roles visuales `ADMIN` | `LEADER` | `MEMBER` (menú filtrado)
+- [x] Redirect `/admin/*` → `/app/dashboard`
+- [x] Modo `VITE_AUTH_MODE=demo` **temporal** (sessionStorage, sin tokens) hasta BackCeere
 
-### Fase 4 — Layout administrativo
+**Contrato esperado del API:**
 
-- Evolucionar `AdminLayout` → `AppLayout`
-- Menú por permisos, responsive, encabezado con usuario
+```text
+POST /auth/login    { email, password } → { user } + Set-Cookie
+POST /auth/logout
+POST /auth/refresh
+GET  /auth/me       → { user }
+```
+
+### Fase 4 — Layout administrativo *(parcialmente adelantada en Fase 3)*
+
+- [x] `AppLayout` con menú por permisos, topbar y usuario
+- [ ] Pulido responsive / UX adicional si hace falta
 
 ### Fase 5 — Dashboard
 
@@ -188,7 +200,7 @@ src/
 /app/configuracion
 ```
 
-Durante la transición, `/admin/*` puede seguir activo como demo hasta la Fase 3.
+Durante la transición, `/admin/*` redirige a `/app/dashboard`.
 
 ---
 
@@ -207,3 +219,4 @@ Durante la transición, `/admin/*` puede seguir activo como demo hasta la Fase 3
 | --- | --- | --- |
 | 2026-09-21 | 1 | Auditoría, PLAN.md, estructura de carpetas, README/.env.example |
 | 2026-09-21 | 2 | Axios, TanStack Query, http-client, health check, ApiHealthBadge |
+| 2026-09-21 | 3 | AuthContext, /app/*, roles, refresh interceptor, modo demo temporal |

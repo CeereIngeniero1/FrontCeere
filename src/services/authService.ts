@@ -1,37 +1,29 @@
-import type { AuthSession } from '../types'
-import { readStorage, removeStorage, writeStorage } from './storage'
+/**
+ * @deprecated El auth real está en `src/api/auth.api.ts` + `AuthContext`.
+ * Este módulo solo reexporta utilidades DEMO temporales.
+ */
+export {
+  clearDemoUser,
+  demoCredentials,
+  demoLogin,
+  isDemoAuthMode,
+  readDemoUser,
+} from '../features/auth/demoAuth'
 
-const DEMO_EMAIL = 'admin@ceere.test'
-const DEMO_PASSWORD = 'demo123'
-
-export const demoCredentials = {
-  email: DEMO_EMAIL,
-  password: DEMO_PASSWORD,
-} as const
-
-export function getSession(): AuthSession | null {
-  return readStorage<AuthSession | null>('session', null)
-}
-
-export function login(email: string, password: string): AuthSession | null {
-  if (email.trim().toLowerCase() !== DEMO_EMAIL || password !== DEMO_PASSWORD) {
-    return null
-  }
-
-  const session: AuthSession = {
-    email: DEMO_EMAIL,
-    name: 'Administrador Demo',
-    loggedInAt: new Date().toISOString(),
-  }
-
-  writeStorage('session', session)
-  return session
-}
-
-export function logout(): void {
-  removeStorage('session')
+/** Compatibilidad: ya no hay getSession/login síncronos en LocalStorage. */
+export function getSession(): null {
+  return null
 }
 
 export function isAuthenticated(): boolean {
-  return getSession() !== null
+  return false
+}
+
+export function login(): null {
+  console.warn('[authService] Use AuthContext.login() instead.')
+  return null
+}
+
+export function logout(): void {
+  console.warn('[authService] Use AuthContext.logout() instead.')
 }

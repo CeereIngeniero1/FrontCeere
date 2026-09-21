@@ -1,29 +1,10 @@
-import { useCallback, useEffect, useState } from 'react'
-import { getSession, login as authLogin, logout as authLogout } from '../services/authService'
-import type { AuthSession } from '../types'
+import { useContext } from 'react'
+import { AuthContext, type AuthContextValue } from '../context/auth-context'
 
-export function useAuth() {
-  const [session, setSession] = useState<AuthSession | null>(() => getSession())
-
-  useEffect(() => {
-    setSession(getSession())
-  }, [])
-
-  const login = useCallback((email: string, password: string) => {
-    const next = authLogin(email, password)
-    setSession(next)
-    return next
-  }, [])
-
-  const logout = useCallback(() => {
-    authLogout()
-    setSession(null)
-  }, [])
-
-  return {
-    session,
-    isAuthenticated: session !== null,
-    login,
-    logout,
+export function useAuth(): AuthContextValue {
+  const ctx = useContext(AuthContext)
+  if (!ctx) {
+    throw new Error('useAuth debe usarse dentro de AuthProvider')
   }
+  return ctx
 }

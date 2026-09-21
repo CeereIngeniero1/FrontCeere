@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { ApiHealthBadge } from '../../components/feedback/ApiHealthBadge'
 import { Logo } from '../../components/Logo'
 import { Alert } from '../../components/ui/Alert'
@@ -7,27 +7,54 @@ import { Button } from '../../components/ui/Button'
 import { Card } from '../../components/ui/Card'
 import { Input } from '../../components/ui/Input'
 import { useAuth } from '../../hooks/useAuth'
-import { demoCredentials } from '../../services/authService'
+import { demoCredentials } from '../../features/auth/demoAuth'
+import { ApiError } from '../../types/api'
 
 export function LoginPage() {
-  const { isAuthenticated, login } = useAuth()
+  const { isAuthenticated, isBootstrapping, isDemoMode, login } = useAuth()
   const navigate = useNavigate()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const location = useLocation()
+  const [email, setEmail] = useState(isDemoMode ? demoCredentials.email : '')
+  const [password, setPassword] = useState(isDemoMode ? demoCredentials.password : '')
   const [error, setError] = useState('')
+  const [submitting, setSubmitting] = useState(false)
 
-  if (isAuthenticated) {
-    return <Navigate to="/admin" replace />
+  const from =
+    (location.state as { from?: string } | null)?.from &&
+    (location.state as { from: string }).from.startsWith('/app')
+      ? (location.state as { from: string }).from
+      : '/app/dashboard'
+
+  if (isBootstrapping) {
+    return (
+      <div className="login-page">
+        <p className="auth-loading" role="status">
+          Verificando sesión…
+        </p>
+      </div>
+    )
   }
 
-  const handleSubmit = (event: FormEvent) => {
+  if (isAuthenticated) {
+    return <Navigate to={from} replace />
+  }
+
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
-    const session = login(email, password)
-    if (!session) {
-      setError('Credenciales incorrectas. Use las credenciales de demostración.')
-      return
+    setSubmitting(true)
+    setError('')
+    try {
+      await login({ email, password })
+      navigate(from, { replace: true })
+    } catch (err) {
+      const message =
+        err instanceof ApiError
+          ? err.message
+          : 'No se pudo iniciar sesión. Intente de nuevo.'
+      setError(message)
+    } finally {
+      setSubmitting(false)
     }
-    navigate('/admin')
   }
 
   return (
@@ -36,19 +63,24 @@ export function LoginPage() {
         <Logo to="/" />
         <h1 style={{ marginTop: '1.25rem' }}>Iniciar sesión</h1>
         <p className="lead">
-          Acceso simulado al panel administrativo de prueba. No es un sistema de
-          autenticación de producción.
+          {isDemoMode
+            ? 'Modo DEMO temporal: la sesión no usa cookies reales del API.'
+            : 'Acceso a la plataforma interna CEERE (sesión por cookies HTTP-only).'}
         </p>
 
-        <Alert variant="info" title="Credenciales de demostración">
-          Correo: {demoCredentials.email}
-          <br />
-          Contraseña: {demoCredentials.password}
-        </Alert>
+        {isDemoMode ? (
+          <Alert variant="info" title="Credenciales DEMO (temporales)">
+            {demoCredentials.accounts.map((account) => (
+              <div key={account.email}>
+                {account.role}: {account.email} / {account.password}
+              </div>
+            ))}
+          </Alert>
+        ) : null}
 
         {error ? <Alert variant="error">{error}</Alert> : null}
 
-        <form onSubmit={handleSubmit} noValidate>
+        <form onSubmit={(event) => void handleSubmit(event)} noValidate>
           <Input
             label="Correo"
             name="email"
@@ -73,8 +105,8 @@ export function LoginPage() {
             autoComplete="current-password"
             required
           />
-          <Button type="submit" style={{ width: '100%' }}>
-            Entrar al panel
+          <Button type="submit" style={{ width: '100%' }} disabled={submitting}>
+            {submitting ? 'Entrando…' : 'Entrar a la plataforma'}
           </Button>
         </form>
 

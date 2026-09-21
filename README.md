@@ -10,7 +10,9 @@ Frontend de la plataforma web **CEERE Software**.
 
 El plan de trabajo por fases está en [`PLAN.md`](./PLAN.md).
 
-> **Estado actual:** la web comercial está lista. El panel bajo `/admin` usa datos y sesión **demostrativos** (LocalStorage). El cliente HTTP (Axios + TanStack Query) ya está cableado (Fase 2). La autenticación real con cookies HTTP-only es la Fase 3.
+> **Estado actual:** web comercial lista. Auth de plataforma en Fase 3 (`/app/*`, roles).  
+> Con `VITE_AUTH_MODE=demo` la sesión es temporal (sessionStorage). Con `api`, cookies HTTP-only.  
+> Tareas/agenda/tiempo siguen con datos LocalStorage hasta las fases de negocio.
 
 ## Requisitos
 
@@ -28,23 +30,28 @@ npm install
 Copie `.env.example` a `.env` (no suba `.env` al repositorio):
 
 ```env
-# Desarrollo local (backend NestJS)
 VITE_API_URL=http://localhost:3000/api
+VITE_AUTH_MODE=demo
 
-# Pruebas en hosting
+# Pruebas
 # VITE_API_URL=https://api-prueba.ceere.net/api
+# VITE_AUTH_MODE=api
 
 # Producción
 # VITE_API_URL=https://api.ceere.net/api
+# VITE_AUTH_MODE=api
 ```
 
-En desarrollo (`npm run dev`) se carga `.env.development` con la URL de pruebas. El login muestra un indicador de `GET /health`. El resto del panel sigue en modo demo hasta la Fase 3+.
+| Variable | Descripción |
+| --- | --- |
+| `VITE_API_URL` | Base del API, **incluyendo** `/api` |
+| `VITE_AUTH_MODE` | `demo` (temporal) o `api` (cookies reales) |
 
 ## Scripts
 
 | Comando | Descripción |
 | --- | --- |
-| `npm run dev` | Servidor de desarrollo (`http://localhost:5173`) |
+| `npm run dev` | Servidor de desarrollo |
 | `npm run lint` | ESLint |
 | `npm run build` | Compila a `dist/` y copia `.htaccess` |
 | `npm run preview` | Vista previa del build |
@@ -58,91 +65,65 @@ En desarrollo (`npm run dev`) se carga `.env.development` con la URL de pruebas.
 | `/servicios` | Servicios |
 | `/nosotros` | Institucional |
 | `/contacto` | Formulario (simulado) |
-| `/login` | Acceso (hoy: demo LocalStorage) |
+| `/login` | Acceso a la plataforma |
 
-## Rutas privadas (demo actual)
+## Rutas privadas (`/app/*`)
 
-| Ruta | Descripción |
+Protegidas por sesión. El menú se filtra por rol.
+
+| Ruta | Roles |
 | --- | --- |
-| `/admin` | Dashboard demo |
-| `/admin/tareas` | Tareas locales |
-| `/admin/agenda` | Agenda local |
-| `/admin/tiempo` | Tiempo local |
-| `/admin/reportes` | Reportes + CSV local |
+| `/app/dashboard` | ADMIN, LEADER, MEMBER |
+| `/app/tareas` | ADMIN, LEADER, MEMBER |
+| `/app/tiempo` | ADMIN, LEADER, MEMBER |
+| `/app/reporte-diario` | ADMIN, LEADER, MEMBER |
+| `/app/agenda` | ADMIN, LEADER, MEMBER |
+| `/app/equipo` | ADMIN, LEADER |
+| `/app/reportes` | ADMIN, LEADER |
+| `/app/configuracion` | ADMIN |
 
-### Credenciales demo (solo LocalStorage)
+`/admin/*` redirige a `/app/dashboard`.
 
-```text
-Correo: admin@ceere.test
-Contraseña: demo123
-```
-
-**No** es autenticación segura. Se reemplazará por cookies HTTP-only contra la API.
-
-## Rutas privadas objetivo (próximas fases)
+### Credenciales DEMO (`VITE_AUTH_MODE=demo`)
 
 ```text
-/app/dashboard
-/app/tareas
-/app/tiempo
-/app/reporte-diario
-/app/agenda
-/app/equipo
-/app/reportes
-/app/configuracion
+ADMIN   admin@ceere.test  / demo123
+LEADER  lider@ceere.test  / demo123
+MEMBER  miembro@ceere.test / demo123
 ```
 
-## Estructura (evolución)
+No hay tokens en localStorage. En modo `api` la sesión vive solo en cookies HTTP-only.
+
+## Autenticación (contrato API)
 
 ```text
-src/
-  api/           # Preparado (cliente HTTP en Fase 2)
-  components/    # UI actual + carpetas common/forms/tables/feedback
-  features/      # Dominios (auth, tasks, …) en fases posteriores
-  layouts/
-  pages/
-    public/      # Sitio comercial
-    admin/       # Panel demo actual
-    app/         # Plataforma privada objetivo
-  routes/
-  data/          # Contenido comercial + seeds demo
-  services/      # Auth/datos demo (temporal)
-  styles/
+POST /auth/login
+POST /auth/logout
+POST /auth/refresh
+GET  /auth/me
 ```
 
-## Compilación y despliegue en cPanel (`prueba.ceere.net`)
+## Cliente HTTP
+
+- Axios + `withCredentials`
+- TanStack Query
+- Refresh ante 401 (un intento, sin bucles)
+- `GET /health` visible en `/login`
+
+## Compilación y despliegue (cPanel)
 
 ```bash
 npm run build
 ```
 
-Suba el **contenido** de `dist/` al document root del subdominio:
+Suba el contenido de `dist/` (`index.html`, `.htaccess`, `assets/`).
 
-- `index.html`
-- `.htaccess`
-- `assets/`
-
-Verifique rutas internas con F5 (`/login`, `/servicios`, `/admin/agenda`).
-
-## Lo que no incluye este frontend
+## Fuera de alcance
 
 - Chat, WhatsApp, cámara, capturas o vigilancia
 - Sustitución del WordPress en `https://ceere.net/`
 
-## Cliente HTTP (Fase 2)
-
-- `src/api/http-client.ts` — Axios con `withCredentials: true`
-- `src/api/health.api.ts` — `GET /health`
-- `src/api/query-client.ts` — TanStack Query
-- Indicador en `/login` (`ApiHealthBadge`)
-
-Para construir apuntando al API de pruebas:
-
-```bash
-# PowerShell
-$env:VITE_API_URL="https://api-prueba.ceere.net/api"; npm run build
-```
-
 ## Siguiente paso
 
-**Fase 3** — autenticación real (login / me / logout / refresh), rutas `/app/*` protegidas y roles visuales.
+**Fase 5** — dashboards con indicadores reales (cuando el API esté disponible).  
+La Fase 4 (layout) ya quedó mayormente cubierta por `AppLayout`.

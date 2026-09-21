@@ -1,8 +1,15 @@
 export { getHealth } from './health.api'
 export {
+  loginRequest,
+  logoutRequest,
+  meRequest,
+  refreshRequest,
+} from './auth.api'
+export {
   httpClient,
   getApiBaseUrl,
   toApiError,
+  setSessionExpiredHandler,
   apiGet,
   apiPost,
   apiPatch,

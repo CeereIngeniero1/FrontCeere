@@ -48,12 +48,6 @@ export interface TimeEntry {
   notes: string
 }
 
-export interface AuthSession {
-  email: string
-  name: string
-  loggedInAt: string
-}
-
 export interface ContactFormData {
   name: string
   company: string
@@ -83,3 +77,5 @@ export interface ActivityItem {
   time: string
   type: 'task' | 'support' | 'meeting' | 'time'
 }
+
+export type { AuthSession, AuthUser, UserRole, LoginPayload } from './auth'

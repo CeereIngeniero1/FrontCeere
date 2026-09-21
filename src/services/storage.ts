@@ -1,5 +1,4 @@
 const STORAGE_KEYS = {
-  session: 'ceere_demo_session',
   tasks: 'ceere_demo_tasks',
   appointments: 'ceere_demo_appointments',
   timeEntries: 'ceere_demo_time_entries',

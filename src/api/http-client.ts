@@ -8,10 +8,18 @@ import { ApiError, type ApiErrorBody } from '../types/api'
 
 const DEFAULT_TIMEOUT_MS = 20_000
 
-/**
- * Base URL del API. Debe incluir el prefijo `/api`.
- * Ejemplo: https://api-prueba.ceere.net/api
- */
+type RetriableConfig = InternalAxiosRequestConfig & {
+  _retry?: boolean
+}
+
+let refreshPromise: Promise<void> | null = null
+let onSessionExpired: (() => void) | null = null
+
+/** Registra callback para limpiar estado de auth cuando el refresh falla. */
+export function setSessionExpiredHandler(handler: (() => void) | null): void {
+  onSessionExpired = handler
+}
+
 export function getApiBaseUrl(): string {
   const raw = import.meta.env.VITE_API_URL?.trim()
   if (!raw) {
@@ -83,14 +91,37 @@ export function toApiError(error: unknown): ApiError {
   })
 }
 
+function shouldSkipRefresh(config?: InternalAxiosRequestConfig): boolean {
+  if (!config) return true
+  if (config.headers?.['X-Skip-Auth-Refresh'] === '1') return true
+  const url = config.url ?? ''
+  return (
+    url.includes('/auth/login') ||
+    url.includes('/auth/refresh') ||
+    url.includes('/auth/logout') ||
+    url.includes('/auth/me')
+  )
+}
+
+async function refreshSessionOnce(): Promise<void> {
+  if (!refreshPromise) {
+    refreshPromise = httpClient
+      .post('/auth/refresh', undefined, {
+        headers: { 'X-Skip-Auth-Refresh': '1' },
+      })
+      .then(() => undefined)
+      .finally(() => {
+        refreshPromise = null
+      })
+  }
+  return refreshPromise
+}
+
 /**
  * Cliente Axios centralizado.
- * - withCredentials: cookies HTTP-only (Fase 3)
- * - errores normalizados a ApiError
+ * - withCredentials: cookies HTTP-only
+ * - un solo intento de refresh ante 401 (sin bucles)
  * - cancelación vía AbortSignal (`config.signal`)
- *
- * El interceptor de refresh de sesión se completa en la Fase 3.
- * Aquí solo se normaliza el 401 sin reintentos en bucle.
  */
 export const httpClient: AxiosInstance = axios.create({
   baseURL: getApiBaseUrl(),
@@ -111,7 +142,23 @@ httpClient.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 
 httpClient.interceptors.response.use(
   (response) => response,
-  (error: AxiosError<ApiErrorBody>) => Promise.reject(toApiError(error)),
+  async (error: AxiosError<ApiErrorBody>) => {
+    const original = error.config as RetriableConfig | undefined
+    const status = error.response?.status
+
+    if (status === 401 && original && !original._retry && !shouldSkipRefresh(original)) {
+      original._retry = true
+      try {
+        await refreshSessionOnce()
+        return httpClient.request(original)
+      } catch {
+        onSessionExpired?.()
+        return Promise.reject(toApiError(error))
+      }
+    }
+
+    return Promise.reject(toApiError(error))
+  },
 )
 
 export async function apiGet<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
