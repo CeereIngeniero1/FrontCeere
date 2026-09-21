@@ -45,4 +45,8 @@ export const queryKeys = {
     mine: ['daily-reports', 'me'] as const,
     team: ['daily-reports', 'team'] as const,
   },
+  calendar: {
+    all: ['calendar'] as const,
+    list: ['calendar', 'list'] as const,
+  },
 }

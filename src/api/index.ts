@@ -22,6 +22,13 @@ export {
   saveDailyReport,
 } from './daily-reports.api'
 export {
+  listCalendarEvents,
+  createCalendarEvent,
+  updateCalendarEvent,
+  cancelCalendarEvent,
+  deleteCalendarEvent,
+} from './calendar.api'
+export {
   httpClient,
   getApiBaseUrl,
   toApiError,

@@ -125,4 +125,4 @@ Suba el contenido de `dist/` (`index.html`, `.htaccess`, `assets/`).
 
 ## Siguiente paso
 
-**Fase 9** — agenda (calendario mensual/semanal/diario + eventos).
+**Fase 10** — usuarios, equipo y reportes por rango de fechas.

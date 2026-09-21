@@ -32,9 +32,13 @@ export interface Appointment {
   title: string
   date: string
   time: string
+  endTime?: string
   type: AppointmentType
   assignee: string
   description: string
+  /** personal = solo el asignado; shared = visible al equipo */
+  visibility?: 'personal' | 'shared'
+  status?: 'active' | 'cancelled'
 }
 
 export interface TimeEntry {

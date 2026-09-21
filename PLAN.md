@@ -179,9 +179,14 @@ GET  /auth/me       → { user }
 - [x] Estado pendiente / enviado
 - [x] `daily-reports.api.ts` + demo LocalStorage
 
-### Fase 9 — Agenda
+### Fase 9 — Agenda *(completada)*
 
-- Calendario (mensual/semanal/diario) + CRUD eventos
+- [x] Vistas mensual, semanal y diaria
+- [x] Crear / editar / cancelar / eliminar
+- [x] Eventos personales y compartidos
+- [x] Filtros por persona y tipo
+- [x] Colores diferenciados por tipo
+- [x] `date-fns` + `calendar.api.ts` + demo LocalStorage
 
 ### Fase 10 — Usuarios, equipo y reportes
 
@@ -243,3 +248,4 @@ Durante la transición, `/admin/*` redirige a `/app/dashboard`.
 | 2026-09-21 | 6 | Tareas: tabla, filtros, RHF/Zod, permisos, tasks.api |
 | 2026-09-21 | 7 | Tiempo: timer, manual, historial, resumen semanal |
 | 2026-09-21 | 8 | Reporte diario: formulario, historial, vista equipo |
+| 2026-09-21 | 9 | Agenda: mes/semana/día, CRUD eventos, filtros |

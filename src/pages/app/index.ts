@@ -1,6 +1,6 @@
 export { DashboardPage } from './DashboardPage'
 export { TasksPage } from './TasksPage'
-export { AgendaPage } from '../admin/AgendaPage'
+export { AgendaPage } from './AgendaPage'
 export { TimePage } from './TimePage'
 export { ReportsPage } from '../admin/ReportsPage'
 export { PlaceholderPage } from './PlaceholderPage'
