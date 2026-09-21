@@ -3,6 +3,7 @@ const STORAGE_KEYS = {
   appointments: 'ceere_demo_appointments',
   timeEntries: 'ceere_demo_time_entries',
   dailyReports: 'ceere_demo_daily_reports',
+  users: 'ceere_demo_users',
 } as const
 
 export function readStorage<T>(key: keyof typeof STORAGE_KEYS, fallback: T): T {

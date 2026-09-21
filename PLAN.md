@@ -188,9 +188,13 @@ GET  /auth/me       → { user }
 - [x] Colores diferenciados por tipo
 - [x] `date-fns` + `calendar.api.ts` + demo LocalStorage
 
-### Fase 10 — Usuarios, equipo y reportes
+### Fase 10 — Usuarios, equipo y reportes *(completada)*
 
-- Admin de usuarios, vista de equipo, reportes por rango
+- [x] Administración de usuarios (ADMIN) sin mostrar contraseñas
+- [x] Vista de equipo con integrantes + indicadores
+- [x] Reportes por rango: horas, tareas, cumplimiento, bloqueos
+- [x] Exportación CSV (Excel en v2)
+- [x] APIs demo: `/users`, `/team/members`, `/reports/summary`
 
 ### Fase 11 — Pruebas y despliegue
 
@@ -249,3 +253,4 @@ Durante la transición, `/admin/*` redirige a `/app/dashboard`.
 | 2026-09-21 | 7 | Tiempo: timer, manual, historial, resumen semanal |
 | 2026-09-21 | 8 | Reporte diario: formulario, historial, vista equipo |
 | 2026-09-21 | 9 | Agenda: mes/semana/día, CRUD eventos, filtros |
+| 2026-09-21 | 10 | Usuarios, equipo, reportes por fechas |

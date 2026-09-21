@@ -11,7 +11,7 @@ import { ApiError } from '../../types/api'
 import { formatDate, formatLongDate, formatMinutes } from '../../utils'
 import { statusLabels } from '../../utils/labels'
 
-export function TeamDashboardView() {
+export function TeamDashboardView({ embedded = false }: { embedded?: boolean }) {
   const { data, isLoading, isError, error, refetch, isFetching } = useTeamDashboard(true)
 
   if (isLoading) {
@@ -30,10 +30,12 @@ export function TeamDashboardView() {
 
   return (
     <div>
-      <PageHeader
-        title="Equipo"
-        description={`${formatLongDate(data.date)}. Resultados y avances del equipo (sin vigilancia invasiva).`}
-      />
+      {embedded ? null : (
+        <PageHeader
+          title="Equipo"
+          description={`${formatLongDate(data.date)}. Resultados y avances del equipo (sin vigilancia invasiva).`}
+        />
+      )}
 
       {data.isDemoData ? (
         <p className="demo-inline" role="note">

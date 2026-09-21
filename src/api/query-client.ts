@@ -49,4 +49,16 @@ export const queryKeys = {
     all: ['calendar'] as const,
     list: ['calendar', 'list'] as const,
   },
+  users: {
+    all: ['users'] as const,
+    list: ['users', 'list'] as const,
+  },
+  team: {
+    all: ['team'] as const,
+    members: ['team', 'members'] as const,
+  },
+  reports: {
+    all: ['reports'] as const,
+    summary: ['reports', 'summary'] as const,
+  },
 }

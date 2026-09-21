@@ -125,4 +125,4 @@ Suba el contenido de `dist/` (`index.html`, `.htaccess`, `assets/`).
 
 ## Siguiente paso
 
-**Fase 10** — usuarios, equipo y reportes por rango de fechas.
+**Fase 11** — pruebas, lint/build, `.htaccess`, F5 en rutas internas y preparación de `dist` para `prueba.ceere.net`.

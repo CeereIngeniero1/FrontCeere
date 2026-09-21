@@ -28,6 +28,9 @@ export {
   cancelCalendarEvent,
   deleteCalendarEvent,
 } from './calendar.api'
+export { listUsers, createUser, updateUser } from './users.api'
+export { getTeamMembers } from './team.api'
+export { getReportsSummary } from './reports.api'
 export {
   httpClient,
   getApiBaseUrl,

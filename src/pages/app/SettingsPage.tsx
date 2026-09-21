@@ -1,11 +1,5 @@
-import { PlaceholderPage } from './PlaceholderPage'
+import { UsersView } from '../../features/users/UsersView'
 
 export function SettingsPage() {
-  return (
-    <PlaceholderPage
-      title="Configuración"
-      description="Administración de usuarios y preferencias (solo ADMIN)."
-      phaseHint="la Fase 10"
-    />
-  )
+  return <UsersView />
 }

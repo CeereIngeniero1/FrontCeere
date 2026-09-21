@@ -1,6 +1,5 @@
-import { TeamDashboardView } from '../../features/dashboard/TeamDashboardView'
+import { TeamView } from '../../features/team/TeamView'
 
-/** Dashboard del equipo (`/app/equipo`) — ADMIN / LEADER. */
 export function TeamPage() {
-  return <TeamDashboardView />
+  return <TeamView />
 }
