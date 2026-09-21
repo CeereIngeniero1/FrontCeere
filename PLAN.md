@@ -161,9 +161,14 @@ GET  /auth/me       → { user }
 - [x] `tasks.api.ts` + demo LocalStorage marcado
 - [ ] Vista Kanban (mejora posterior)
 
-### Fase 7 — Tiempo
+### Fase 7 — Tiempo *(completada)*
 
-- Start/stop, temporizador informativo, manual, historial, resumen
+- [x] Inicio y detención de actividad
+- [x] Temporizador informativo (duración oficial al detener)
+- [x] Registro manual con RHF + Zod
+- [x] Historial diario y resumen semanal
+- [x] `time.api.ts` + demo marcado
+- [x] Dashboard refleja timer activo en modo demo
 
 ### Fase 8 — Reporte diario
 
@@ -231,3 +236,4 @@ Durante la transición, `/admin/*` redirige a `/app/dashboard`.
 | 2026-09-21 | 3 | AuthContext, /app/*, roles, refresh interceptor, modo demo temporal |
 | 2026-09-21 | 5 | Dashboards personal y equipo + dashboard.api |
 | 2026-09-21 | 6 | Tareas: tabla, filtros, RHF/Zod, permisos, tasks.api |
+| 2026-09-21 | 7 | Tiempo: timer, manual, historial, resumen semanal |

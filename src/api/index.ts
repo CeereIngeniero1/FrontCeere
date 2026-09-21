@@ -8,6 +8,14 @@ export {
 export { getPersonalDashboard, getTeamDashboard } from './dashboard.api'
 export { listTasks, createTask, updateTask, deleteTask } from './tasks.api'
 export {
+  getTimeSummary,
+  listTimeEntries,
+  startTimer,
+  stopTimer,
+  createManualTimeEntry,
+  deleteTimeEntry,
+} from './time.api'
+export {
   httpClient,
   getApiBaseUrl,
   toApiError,

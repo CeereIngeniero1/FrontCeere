@@ -34,4 +34,9 @@ export const queryKeys = {
     all: ['tasks'] as const,
     list: ['tasks', 'list'] as const,
   },
+  time: {
+    all: ['time'] as const,
+    summary: ['time', 'summary'] as const,
+    entries: ['time', 'entries'] as const,
+  },
 }

@@ -125,4 +125,4 @@ Suba el contenido de `dist/` (`index.html`, `.htaccess`, `assets/`).
 
 ## Siguiente paso
 
-**Fase 7** — registro de tiempo (inicio/detención, temporizador, historial).
+**Fase 8** — reporte diario (formulario, edición, historial, vista de equipo).

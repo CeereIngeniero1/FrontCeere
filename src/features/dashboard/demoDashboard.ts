@@ -4,6 +4,7 @@
  */
 import { dashboardBlocks } from '../../data/reports'
 import { getAppointments, getTasks, getTimeEntries } from '../../services/dataService'
+import { readDemoTimer } from '../time/demoTime'
 import type { AuthUser } from '../../types/auth'
 import type {
   PersonalDashboard,
@@ -63,14 +64,15 @@ export function buildDemoPersonalDashboard(user: AuthUser): PersonalDashboard {
       type: item.type,
     }))
 
-  // DEMO: sin temporizador real; se deriva de si hay entradas “abiertas” (no hay).
-  const timeTrackingStatus: TimeTrackingStatus = 'idle'
+  // DEMO: refleja el timer activo de sessionStorage si existe.
+  const activeTimer = readDemoTimer()
+  const timeTrackingStatus: TimeTrackingStatus = activeTimer ? 'running' : 'idle'
 
   return {
     userName: user.name,
     date: today,
     timeTrackingStatus,
-    activeActivityLabel: null,
+    activeActivityLabel: activeTimer?.description ?? null,
     pendingTasks: open.length,
     overdueTasks: overdue.length,
     hoursTodayMinutes,
@@ -125,6 +127,8 @@ export function buildDemoTeamDashboard(): TeamDashboard {
     hasActiveTimer: false,
   }))
 
+  const activeTimer = readDemoTimer()
+
   const upcomingEvents = appointments
     .filter((item) => item.date >= today)
     .sort((a, b) => `${a.date}${a.time}`.localeCompare(`${b.date}${b.time}`))
@@ -142,7 +146,7 @@ export function buildDemoTeamDashboard(): TeamDashboard {
     tasksByStatus,
     overdueTasks,
     hoursByPerson,
-    activeTimers: 0,
+    activeTimers: activeTimer ? 1 : 0,
     dailyReportsSubmitted: 1,
     dailyReportsPending: 2,
     blocks: dashboardBlocks,
