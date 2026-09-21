@@ -151,9 +151,15 @@ GET  /auth/me       → { user }
 - [x] Cliente `dashboard.api.ts` + agregador DEMO marcado (`isDemoData`)
 - [x] Sin vigilancia invasiva (solo avances y resultados)
 
-### Fase 6 — Tareas
+### Fase 6 — Tareas *(completada)*
 
-- Listado, filtros, formularios, estados, asignación (API real)
+- [x] Listado en tabla con búsqueda y filtros
+- [x] Crear / editar / asignar / estado / prioridad
+- [x] Identificación visual de vencidas (etiqueta + fila)
+- [x] Permisos por rol (MEMBER: solo asignadas)
+- [x] React Hook Form + Zod
+- [x] `tasks.api.ts` + demo LocalStorage marcado
+- [ ] Vista Kanban (mejora posterior)
 
 ### Fase 7 — Tiempo
 
@@ -224,3 +230,4 @@ Durante la transición, `/admin/*` redirige a `/app/dashboard`.
 | 2026-09-21 | 2 | Axios, TanStack Query, http-client, health check, ApiHealthBadge |
 | 2026-09-21 | 3 | AuthContext, /app/*, roles, refresh interceptor, modo demo temporal |
 | 2026-09-21 | 5 | Dashboards personal y equipo + dashboard.api |
+| 2026-09-21 | 6 | Tareas: tabla, filtros, RHF/Zod, permisos, tasks.api |

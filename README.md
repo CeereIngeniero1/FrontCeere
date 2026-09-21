@@ -125,4 +125,4 @@ Suba el contenido de `dist/` (`index.html`, `.htaccess`, `assets/`).
 
 ## Siguiente paso
 
-**Fase 6** — tareas (listado, filtros, formularios) contra la API real cuando esté disponible.
+**Fase 7** — registro de tiempo (inicio/detención, temporizador, historial).

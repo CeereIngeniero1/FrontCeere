@@ -30,4 +30,8 @@ export const queryKeys = {
     personal: ['dashboard', 'personal'] as const,
     team: ['dashboard', 'team'] as const,
   },
+  tasks: {
+    all: ['tasks'] as const,
+    list: ['tasks', 'list'] as const,
+  },
 }

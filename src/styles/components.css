@@ -393,6 +393,40 @@
   margin-bottom: 0;
 }
 
+.filter-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  align-self: end;
+  margin-bottom: 0.35rem;
+  font-size: 0.92rem;
+  color: var(--color-gray-700, #334155);
+  cursor: pointer;
+}
+
+.row-overdue td {
+  background: rgba(180, 35, 24, 0.06);
+}
+
+.overdue-tag {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.45rem;
+  border: 1px solid #b42318;
+  border-radius: 4px;
+  color: #b42318;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  vertical-align: middle;
+}
+
+.due-overdue {
+  color: #b42318;
+  font-weight: 700;
+}
+
 .kpi-grid {
   display: grid;
   gap: 1rem;

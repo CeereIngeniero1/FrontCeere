@@ -1,5 +1,5 @@
 export { DashboardPage } from './DashboardPage'
-export { TasksPage } from '../admin/TasksPage'
+export { TasksPage } from './TasksPage'
 export { AgendaPage } from '../admin/AgendaPage'
 export { TimePage } from '../admin/TimePage'
 export { ReportsPage } from '../admin/ReportsPage'

@@ -12,6 +12,7 @@ interface TableProps<T> {
   rows: T[]
   rowKey: (row: T) => string
   emptyMessage?: string
+  rowClassName?: (row: T) => string | undefined
 }
 
 export function Table<T>({
@@ -19,6 +20,7 @@ export function Table<T>({
   rows,
   rowKey,
   emptyMessage = 'No hay registros para mostrar.',
+  rowClassName,
 }: TableProps<T>) {
   if (rows.length === 0) {
     return <p className="empty-state">{emptyMessage}</p>
@@ -38,7 +40,7 @@ export function Table<T>({
         </thead>
         <tbody>
           {rows.map((row) => (
-            <tr key={rowKey(row)}>
+            <tr key={rowKey(row)} className={rowClassName?.(row)}>
               {columns.map((column) => (
                 <td key={column.key} className={column.className} data-label={column.header}>
                   {column.render(row)}

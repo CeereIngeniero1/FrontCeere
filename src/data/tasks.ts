@@ -82,6 +82,27 @@ export const initialTasks: Task[] = [
     status: 'programada',
     estimatedHours: 3,
   },
+  {
+    id: 'task-9',
+    title: 'Actualizar checklist de soporte diario',
+    clientOrProject: 'Proyecto interno',
+    assignee: 'Miembro Demo',
+    priority: 'media',
+    dueDate: '2026-09-22',
+    status: 'en_proceso',
+    estimatedHours: 2,
+    description: 'Tarea de ejemplo asignada al rol MEMBER.',
+  },
+  {
+    id: 'task-10',
+    title: 'Revisar pendientes de la semana',
+    clientOrProject: 'Proyecto interno',
+    assignee: 'Miembro Demo',
+    priority: 'baja',
+    dueDate: '2026-09-19',
+    status: 'pendiente',
+    estimatedHours: 1,
+  },
 ]
 
 export const assignees = ['Ana Gómez', 'Carlos Ruiz', 'Laura Méndez'] as const

@@ -6,6 +6,7 @@ export {
   refreshRequest,
 } from './auth.api'
 export { getPersonalDashboard, getTeamDashboard } from './dashboard.api'
+export { listTasks, createTask, updateTask, deleteTask } from './tasks.api'
 export {
   httpClient,
   getApiBaseUrl,
