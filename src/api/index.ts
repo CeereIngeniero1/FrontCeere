@@ -16,6 +16,12 @@ export {
   deleteTimeEntry,
 } from './time.api'
 export {
+  getTodayDailyReport,
+  listMyDailyReports,
+  listTeamDailyReports,
+  saveDailyReport,
+} from './daily-reports.api'
+export {
   httpClient,
   getApiBaseUrl,
   toApiError,

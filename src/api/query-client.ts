@@ -39,4 +39,10 @@ export const queryKeys = {
     summary: ['time', 'summary'] as const,
     entries: ['time', 'entries'] as const,
   },
+  dailyReports: {
+    all: ['daily-reports'] as const,
+    today: ['daily-reports', 'today'] as const,
+    mine: ['daily-reports', 'me'] as const,
+    team: ['daily-reports', 'team'] as const,
+  },
 }

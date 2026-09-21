@@ -125,4 +125,4 @@ Suba el contenido de `dist/` (`index.html`, `.htaccess`, `assets/`).
 
 ## Siguiente paso
 
-**Fase 8** — reporte diario (formulario, edición, historial, vista de equipo).
+**Fase 9** — agenda (calendario mensual/semanal/diario + eventos).

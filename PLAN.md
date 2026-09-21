@@ -170,9 +170,14 @@ GET  /auth/me       → { user }
 - [x] `time.api.ts` + demo marcado
 - [x] Dashboard refleja timer activo en modo demo
 
-### Fase 8 — Reporte diario
+### Fase 8 — Reporte diario *(completada)*
 
-- Formulario del día, edición, historial, vista de equipo
+- [x] Formulario del día (4 campos requeridos)
+- [x] Crear / editar reporte de hoy
+- [x] Historial propio
+- [x] Vista de equipo (ADMIN / LEADER)
+- [x] Estado pendiente / enviado
+- [x] `daily-reports.api.ts` + demo LocalStorage
 
 ### Fase 9 — Agenda
 
@@ -237,3 +242,4 @@ Durante la transición, `/admin/*` redirige a `/app/dashboard`.
 | 2026-09-21 | 5 | Dashboards personal y equipo + dashboard.api |
 | 2026-09-21 | 6 | Tareas: tabla, filtros, RHF/Zod, permisos, tasks.api |
 | 2026-09-21 | 7 | Tiempo: timer, manual, historial, resumen semanal |
+| 2026-09-21 | 8 | Reporte diario: formulario, historial, vista equipo |

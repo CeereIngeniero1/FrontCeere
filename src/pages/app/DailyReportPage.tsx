@@ -1,11 +1,5 @@
-import { PlaceholderPage } from './PlaceholderPage'
+import { DailyReportView } from '../../features/daily-reports/DailyReportView'
 
 export function DailyReportPage() {
-  return (
-    <PlaceholderPage
-      title="Reporte diario"
-      description="Registre lo completado, lo pendiente y los bloqueos del día."
-      phaseHint="la Fase 8"
-    />
-  )
+  return <DailyReportView />
 }

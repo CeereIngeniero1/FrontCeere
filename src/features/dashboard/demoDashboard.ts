@@ -5,6 +5,7 @@
 import { dashboardBlocks } from '../../data/reports'
 import { getAppointments, getTasks, getTimeEntries } from '../../services/dataService'
 import { readDemoTimer } from '../time/demoTime'
+import { getDemoTodayReport, listDemoTeamReports } from '../daily-reports/demoDailyReports'
 import type { AuthUser } from '../../types/auth'
 import type {
   PersonalDashboard,
@@ -67,6 +68,7 @@ export function buildDemoPersonalDashboard(user: AuthUser): PersonalDashboard {
   // DEMO: refleja el timer activo de sessionStorage si existe.
   const activeTimer = readDemoTimer()
   const timeTrackingStatus: TimeTrackingStatus = activeTimer ? 'running' : 'idle'
+  const todayReport = getDemoTodayReport(user)
 
   return {
     userName: user.name,
@@ -78,7 +80,7 @@ export function buildDemoPersonalDashboard(user: AuthUser): PersonalDashboard {
     hoursTodayMinutes,
     hoursWeekMinutes,
     upcomingEvents,
-    dailyReportStatus: 'pending',
+    dailyReportStatus: todayReport.status,
     blocks: dashboardBlocks,
     openTasks: open.slice(0, 6).map((task) => ({
       id: task.id,
@@ -128,6 +130,9 @@ export function buildDemoTeamDashboard(): TeamDashboard {
   }))
 
   const activeTimer = readDemoTimer()
+  const teamReportsToday = listDemoTeamReports().items.filter(
+    (item) => item.date === today,
+  )
 
   const upcomingEvents = appointments
     .filter((item) => item.date >= today)
@@ -147,8 +152,8 @@ export function buildDemoTeamDashboard(): TeamDashboard {
     overdueTasks,
     hoursByPerson,
     activeTimers: activeTimer ? 1 : 0,
-    dailyReportsSubmitted: 1,
-    dailyReportsPending: 2,
+    dailyReportsSubmitted: teamReportsToday.length,
+    dailyReportsPending: Math.max(0, 3 - teamReportsToday.length),
     blocks: dashboardBlocks,
     upcomingEvents,
     isDemoData: true,
